@@ -5,15 +5,15 @@ from homeassistant.data_entry_flow import FlowResult
 from .const import DOMAIN
 
 @config_entries.HANDLERS.register(DOMAIN)
-class OekostromPriceConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Handle a config flow for Oekostrom Price."""
+class OekostromATPriceConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    """Handle a config flow for Oekostrom AT Price."""
 
     VERSION = 1
 
     async def async_step_user(self, user_input=None):
         """Handle the initial step."""
         if user_input is not None:
-            return self.async_create_entry(title="Oekostrom Price", data=user_input)
+            return self.async_create_entry(title="Oekostrom AT Price", data=user_input)
 
         return self.async_show_form(
             step_id="user", data_schema=vol.Schema({
@@ -29,7 +29,7 @@ class OekostromPriceConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_reauth(self, user_input=None):
         """Handle reauthentication."""
         if user_input is not None:
-            return self.async_create_entry(title="Oekostrom Price", data=user_input)
+            return self.async_create_entry(title="Oekostrom AT Price", data=user_input)
 
         return self.async_show_form(
             step_id="reauth", data_schema=vol.Schema({

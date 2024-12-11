@@ -1,1 +1,0 @@
-DOMAIN = "oekostrom_price"

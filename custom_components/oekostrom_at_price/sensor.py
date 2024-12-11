@@ -36,21 +36,21 @@ def fetch_price(session):
 
 async def async_setup_platform(hass: HomeAssistant, config, async_add_entities, discovery_info=None):
     """Set up the sensor platform."""
-    async_add_entities([OekostromPriceSensor(hass, config)])
+    async_add_entities([OekostromATPriceSensor(hass, config)])
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities):
-    """Set up the Oekostrom Price platform via config entry."""
-    async_add_entities([OekostromPriceSensor(hass, entry.data)])
+    """Set up the Oekostrom AT Price platform via config entry."""
+    async_add_entities([OekostromATPriceSensor(hass, entry.data)])
     return True
 
-class OekostromPriceSensor(Entity):
-    """Representation of the Oekostrom price sensor."""
+class OekostromATPriceSensor(Entity):
+    """Representation of the Oekostrom AT price sensor."""
 
     def __init__(self, hass, config):
         self._hass = hass
         self._state = None
-        self._name = "Oekostrom Price"
-        self._unique_id = "oekostrom_price"
+        self._name = "Oekostrom AT Price"
+        self._unique_id = "oekostrom_at_price"
         self._session = login_to_oekostrom(config.get("username"), config.get("password"))
 
     @property
@@ -70,7 +70,7 @@ class OekostromPriceSensor(Entity):
 
     async def async_update(self):
         """Fetch the latest price and update the sensor state."""
-        _LOGGER.debug("Updating Oekostrom price sensor...")
+        _LOGGER.debug("Updating Oekostrom AT price sensor...")
         if self._session:
             arbeitspreis = fetch_price(self._session)
             if arbeitspreis is not None:
