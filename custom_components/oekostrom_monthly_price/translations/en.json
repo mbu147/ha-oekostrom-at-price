@@ -1,9 +1,9 @@
 {
-    "title": "aWATTar Monthly Price",
+    "title": "Oekostrom Price",
     "step": {
       "user": {
-        "title": "aWATTar Monthly Price",
-        "description": "Set up the aWATTar Monthly Price integration.",
+        "title": "Oekostrom Price",
+        "description": "Set up the Oekostrom Price integration.",
         "data": {
           "name": "Integration Name"
         }
