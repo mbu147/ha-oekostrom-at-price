@@ -1,0 +1,16 @@
+{
+    "title": "aWATTar Monthly Price",
+    "step": {
+      "user": {
+        "title": "aWATTar Monthly Price",
+        "description": "Set up the aWATTar Monthly Price integration.",
+        "data": {
+          "name": "Integration Name"
+        }
+      }
+    },
+    "error": {
+      "name_exists": "Integration name already exists."
+    }
+  }
+  

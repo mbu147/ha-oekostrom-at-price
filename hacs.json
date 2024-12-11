@@ -1,0 +1,18 @@
+{
+    "name": "aWATTar Monthly Price",
+    "content_in_root": false,
+    "domains": [
+      "sensor"
+    ],
+    "country": "AT",
+    "homeassistant": "2021.1.5",
+    "render_readme": true,
+    "zip_release": false,
+    "filename": "",
+    "iot_class": "Cloud Polling",
+    "version": "0.0.2",
+    "documentation": "https://github.com/mbu147/ha-aWATTar-monthly-price",
+    "issue_tracker": "https://github.com/mbu147/ha-aWATTar-monthly-price/issues",
+    "release_notes": "https://github.com/mbu147/ha-aWATTar-monthly-price/releases"
+  }
+  

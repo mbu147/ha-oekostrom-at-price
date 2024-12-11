@@ -1,0 +1,14 @@
+{
+  "domain": "oekostrom_price",
+  "name": "Oekostrom Price",
+  "version": "1.0.0",
+  "documentation": "https://github.com/mbu147/ha-oekostrom-monthly-price",
+  "dependencies": [],
+  "codeowners": ["@mbu147"],
+  "iot_class": "cloud_polling",
+  "requirements": [
+    "requests",
+    "beautifulsoup4"
+  ],
+  "config_flow": true
+}

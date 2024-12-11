@@ -1,0 +1,1 @@
+DOMAIN = "oekostrom_price"
