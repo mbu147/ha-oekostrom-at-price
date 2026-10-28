@@ -1,6 +1,7 @@
 """Client for the mein.oekostrom.at customer portal (JSON API behind api-proxy.php)."""
 from __future__ import annotations
 
+import hashlib
 import logging
 import re
 from datetime import date, datetime
@@ -61,7 +62,12 @@ class OekostromClient:
         data = await self._call(
             "UserLogin",
             match.group(1),
-            {"Username": self._username, "Password": self._password, "PortalName": PORTAL_NAME},
+            {
+                "Username": self._username,
+                # The portal frontend sends the MD5 hex digest (spark-md5), not the plain password.
+                "Password": hashlib.md5(self._password.encode("utf-8")).hexdigest(),
+                "PortalName": PORTAL_NAME,
+            },
         )
         guid = data.get("SessionGUID") if isinstance(data, dict) else None
         if not guid:
