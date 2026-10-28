@@ -1,3 +1,4 @@
+import aiohttp
 import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
@@ -17,7 +18,7 @@ class OekostromATPriceConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             await self.async_set_unique_id(user_input["username"].lower())
             self._abort_if_unique_id_configured()
             client = OekostromClient(
-                async_create_clientsession(self.hass),
+                async_create_clientsession(self.hass, cookie_jar=aiohttp.CookieJar()),
                 user_input["username"],
                 user_input["password"],
             )

@@ -1,6 +1,7 @@
 import logging
 from datetime import timedelta
 
+import aiohttp
 from homeassistant.components.sensor import SensorEntity, SensorStateClass
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -16,7 +17,7 @@ _LOGGER = logging.getLogger(__name__)
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities):
     # Own session: the portal uses cookies that must not leak into the shared one.
     client = OekostromClient(
-        async_create_clientsession(hass), entry.data["username"], entry.data["password"]
+        async_create_clientsession(hass, cookie_jar=aiohttp.CookieJar()), entry.data["username"], entry.data["password"]
     )
 
     async def _update():

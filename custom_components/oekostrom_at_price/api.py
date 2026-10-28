@@ -1,6 +1,7 @@
 """Client for the mein.oekostrom.at customer portal (JSON API behind api-proxy.php)."""
 from __future__ import annotations
 
+import logging
 import re
 from datetime import date, datetime
 
@@ -9,6 +10,7 @@ import aiohttp
 BASE_URL = "https://mein.oekostrom.at"
 PROXY_URL = f"{BASE_URL}/wp-content/plugins/oekostrom-kundenportal/includes/api-proxy.php"
 PORTAL_NAME = "OEKOSTROM"
+_LOGGER = logging.getLogger(__name__)
 
 
 class OekostromAuthError(Exception):
@@ -63,6 +65,7 @@ class OekostromClient:
         )
         guid = data.get("SessionGUID") if isinstance(data, dict) else None
         if not guid:
+            _LOGGER.warning("Login rejected: %s", data if isinstance(data, dict) and len(str(data)) < 200 else type(data))
             raise OekostromAuthError("Login failed")
         self._session_guid = guid
 
