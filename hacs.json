@@ -1,17 +1,5 @@
 {
-    "name": "Oekostrom AT Price",
-    "content_in_root": false,
-    "domains": [
-      "sensor"
-    ],
-    "country": "AT",
-    "render_readme": true,
-    "zip_release": false,
-    "filename": "",
-    "iot_class": "Cloud Polling",
-    "version": "0.0.2",
-    "documentation": "https://github.com/mbu147/ha-oekostrom-monthly-price",
-    "issue_tracker": "https://github.com/mbu147/ha-oekostrom-monthly-price/issues",
-    "release_notes": "https://github.com/mbu147/ha-oekostrom-monthly-price/releases"
-  }
-  
+  "name": "Oekostrom AT Price",
+  "country": "AT",
+  "render_readme": true
+}
