@@ -24,6 +24,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
         try:
             return await client.async_get_current_price()
         except Exception as err:
+            _LOGGER.exception("Fetching price failed")
             raise UpdateFailed(str(err)) from err
 
     coordinator = DataUpdateCoordinator(

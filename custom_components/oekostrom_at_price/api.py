@@ -7,6 +7,7 @@ import re
 from datetime import date, datetime
 
 import aiohttp
+from yarl import URL
 
 BASE_URL = "https://mein.oekostrom.at"
 PROXY_URL = f"{BASE_URL}/wp-content/plugins/oekostrom-kundenportal/includes/api-proxy.php"
@@ -74,7 +75,10 @@ class OekostromClient:
             _LOGGER.warning("Login rejected: %s", data if isinstance(data, dict) and len(str(data)) < 200 else type(data))
             raise OekostromAuthError("Login failed")
         self._session_guid = guid
-
+        # The frontend stores these cookies after login; the proxy may rely on them.
+        self._session.cookie_jar.update_cookies(
+            {"oekp_l": guid, "oekp_l_x": str(data.get("_exchangeValue", ""))}, URL(BASE_URL)
+        )
         accounts = [a for a in data.get("AccountIds", []) if a.get("AccType") == "Strom"]
         active = [a for a in accounts if a.get("AccState") == "A"] or accounts
         if not active:
