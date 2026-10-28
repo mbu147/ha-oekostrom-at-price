@@ -36,8 +36,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
 
 class OekostromATPriceSensor(CoordinatorEntity, SensorEntity):
     _attr_name = "Oekostrom AT Price"
-    _attr_native_unit_of_measurement = "ct/kWh"
+    _attr_native_unit_of_measurement = "EUR/kWh"
     _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_suggested_display_precision = 4
     _attr_icon = "mdi:currency-eur"
 
     def __init__(self, coordinator, entry: ConfigEntry):
@@ -46,13 +47,13 @@ class OekostromATPriceSensor(CoordinatorEntity, SensorEntity):
 
     @property
     def native_value(self):
-        return round(self.coordinator.data["Amount"], 4)
+        return round(self.coordinator.data["Amount"] / 100, 4)
 
     @property
     def extra_state_attributes(self):
         d = self.coordinator.data
         return {
-            "net_price": d.get("NetAmount"),
+            "net_price": round(d["NetAmount"] / 100, 4) if d.get("NetAmount") is not None else None,
             "base_fee_gross_per_year": d.get("BaseAmount"),
             "tariff": d.get("Cot"),
             "valid_from": d.get("BDate"),
