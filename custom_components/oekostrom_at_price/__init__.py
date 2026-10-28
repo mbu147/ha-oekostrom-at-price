@@ -1,26 +1,13 @@
-import logging
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 
-from .const import DOMAIN
+PLATFORMS = ["sensor"]
 
-_LOGGER = logging.getLogger(__name__)
 
-async def async_setup(hass: HomeAssistant, config: dict):
-    """Set up the Oekostrom AT Price component."""
-    hass.data.setdefault(DOMAIN, {})
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
 
-async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
-    """Set up Oekostrom AT Price from a config entry."""
-    hass.data[DOMAIN][entry.entry_id] = entry.data
-    hass.async_create_task(
-        hass.config_entries.async_forward_entry_setup(entry, "sensor")
-    )
-    return True
 
-async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry):
-    """Unload Oekostrom AT Price config entry."""
-    await hass.config_entries.async_forward_entry_unload(entry, "sensor")
-    hass.data[DOMAIN].pop(entry.entry_id)
-    return True
+async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    return await hass.config_entries.async_unload_platforms(entry, PLATFORMS)

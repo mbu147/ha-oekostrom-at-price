@@ -1,14 +1,11 @@
 {
   "domain": "oekostrom_at_price",
   "name": "Oekostrom AT Price",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "documentation": "https://github.com/mbu147/ha-oekostrom-at-price",
   "dependencies": [],
   "codeowners": ["@mbu147"],
   "iot_class": "cloud_polling",
-  "requirements": [
-    "requests",
-    "beautifulsoup4"
-  ],
+  "requirements": [],
   "config_flow": true
 }

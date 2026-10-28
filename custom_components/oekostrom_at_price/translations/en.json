@@ -1,16 +1,21 @@
 {
-    "title": "Oekostrom Price",
+  "config": {
     "step": {
       "user": {
-        "title": "Oekostrom Price",
-        "description": "Set up the Oekostrom Price integration.",
+        "title": "Oekostrom AT Price",
+        "description": "Log in with your mein.oekostrom.at credentials.",
         "data": {
-          "name": "Integration Name"
+          "username": "E-mail / username",
+          "password": "Password"
         }
       }
     },
     "error": {
-      "name_exists": "Integration name already exists."
+      "invalid_auth": "Invalid username or password.",
+      "cannot_connect": "Could not connect to mein.oekostrom.at."
+    },
+    "abort": {
+      "already_configured": "This account is already configured."
     }
   }
-  
+}
