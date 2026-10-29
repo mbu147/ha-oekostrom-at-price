@@ -53,6 +53,7 @@ class OekostromATPriceSensor(CoordinatorEntity, SensorEntity):
     def extra_state_attributes(self):
         d = self.coordinator.data
         return {
+            "price_cent_per_kwh": round(d["Amount"], 2),
             "net_price": round(d["NetAmount"] / 100, 4) if d.get("NetAmount") is not None else None,
             "base_fee_gross_per_year": d.get("BaseAmount"),
             "tariff": d.get("Cot"),
